@@ -1,0 +1,77 @@
+html,
+body{
+    background-image: url("../images/seigaiha.png");
+    margin: 0;
+    padding: 0;
+}
+
+.todoapp {
+    border: 2px solid red;
+    width: 550px;
+    margin: 0 auto;
+    margin-top: 50px;
+
+}
+
+.header {
+    border: 2px solid green;
+    text-align: center;
+}
+
+.main {
+    border: 2px solid darkorange
+}
+
+.todo-list{
+    list-style: none;
+}
+
+.footer {
+    border: 2px solid mediumpurple;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.todo-count {
+    float: left;
+    text-align: center;
+    width: 33.33333332%;
+    box-sizing: border-box;
+    border: 2px solid red
+}
+
+
+.filters {
+    float: left;
+    text-align: center;
+    width: 33.33333332%;
+    box-sizing: border-box;
+    border: 2px solid red;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.filters li {
+    list-style: none;
+    display: inline-block;
+}
+
+.clear-completed {
+    float: left;
+    width: 33.33333332%;
+    box-sizing: border-box;
+    border: 2px solid red;
+}
+
+.info{
+    text-align: center;
+}
+
+.edit{
+
+}
+
+.editing{
+
+}
