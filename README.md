@@ -1,5 +1,6 @@
 # jQuery-TodoMVC
 Recreating a jQuery todolist
+http://todomvc.com/examples/jquery/#/all
 
 <b>Picked up new working knowledge of:</b>
 * 1. jQuery
