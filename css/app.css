@@ -3,34 +3,128 @@ body{
     background-image: url("../images/seigaiha.png");
     margin: 0;
     padding: 0;
+    font-family: 'Rubik', sans-serif;
 }
 
 .todoapp {
-    border: 2px solid red;
     width: 700px;
     margin: 0 auto;
     margin-top: 50px;
-
 }
 
 .header {
-    border: 2px solid green;
     text-align: center;
 }
 
+h1 {
+    font-size: 80px;
+    margin: 0;
+    letter-spacing: 15px;
+    text-shadow: 2px 2px 8px #C1C1C1
+}
+
+.t {
+    color: #C22326
+}
+.o {
+    color: #F37338
+}
+.d {
+    color: #FDB632
+}
+.o2 {
+    color: #027878;
+}
+.s {
+    color: #801638
+}
+
+#main,
+#footer {
+	display: none;
+}
+
 .main {
-    border: 2px solid darkorange
+    position: relative;
+    background: rgba(255, 255, 255, 0.5)
+}
+
+.toggleAll {
+    position: absolute;
+    left: 0px;
+    top: -30px;
+}
+
+.new-todo {
+    width: 50%;
+    height: 40px;
+    font-size: 25px;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    padding-left: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.view {
+    border-bottom: 1px solid black;
 }
 
 .todo-list{
     list-style: none;
+    margin: 40px 0;
+    padding: 0;
+}
+
+.todo-list li {
+    margin: 10px 10px;
+}
+
+.todo-list li label {
+    margin-left: 5px;
+    font-size: 30px;
+}
+
+li.completed label {
+	color: #d9d9d9;
+	text-decoration: line-through;
+}
+
+.todo-list li label:hover{
+    color: #F37338
+}
+
+.todo-list li button {
+    position: absolute;
+    right: 0px;
+    border: none;
+    background: none;
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+.todo-list li button:hover{
+    color: red;
+}
+
+.todo-list li.editing .edit {
+	display: block;
+    font-size: 30px;
+    background: none;
+    outline: none;
+}
+
+.todo-list li.editing .view {
+	display: none;
+}
+
+.todo-list li .edit {
+	display: none;
 }
 
 .footer {
-    border: 2px solid mediumpurple;
-    height: 40px;
+    height: 25px;
     box-sizing: border-box;
     padding: 0;
+    background: none;
 }
 
 .todo-count {
@@ -38,49 +132,60 @@ body{
     text-align: center;
     width: 33.33333332%;
     box-sizing: border-box;
-    border: 2px solid red
-}
 
+}
 
 .filters {
     float: left;
     text-align: center;
     width: 33.33333332%;
     box-sizing: border-box;
-    border: 2px solid red;
+
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    margin-left: 10px;
 }
+
 .filters li {
     list-style: none;
     display: inline-block;
+    margin-right: 5px;
 }
 
 .filters li a {
     text-decoration: none;
     color: inherit;
+    padding: 0px 4px;
 }
 
 #clearCompleted {
-    float: left;
+    float: right;
     width: 33.33333332%;
     box-sizing: border-box;
-    border: 2px solid red;
+    border-radius: 5px;
+    background: none;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    width: 150px;
+    font-size: 100%;
+    margin-right: 40px;
+    margin-top: -5px;
+}
+
+#clearCompleted:hover{
+        background: red;
+        color: white;
 }
 
 .info{
     text-align: center;
+    line-height: 10px;
+    margin-top: 100px;
 }
 
 .selected {
-    border: 1px solid lawngreen
-}
-
-.edit{
-}
-
-.editing{
-    display: none;
-
+    border: 1px solid #027878;
+    color: #027878 !important;
+    font-weight: bold;
+    border-radius: 4px;
 }
