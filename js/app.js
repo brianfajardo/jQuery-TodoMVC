@@ -65,6 +65,7 @@ var app = {
 		utility.store('LS-todos', this.todos);
 		$('.todo-list').html(this.todoTemplate(this.todos));
 		$('.main').toggle(todos.length > 0);
+		$('.toggle-all').prop('checked', this.getActiveTodos().length === 0); //When all todos are completed, toggle on
 		this.renderFooter();
 
 	},
@@ -75,7 +76,7 @@ var app = {
 			completedTodos: this.todos.length - this.getActiveTodos().length,
 			filter: this.filter,
 		});
-		$('.footer').html(template);
+		$('.footer').toggle(this.todos.length > 0).html(template);
 	},
 	create: function (event) {
 		var $input = $(event.target);
