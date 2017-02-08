@@ -10,4 +10,4 @@ http://todomvc.com/examples/jquery/#/all
 * 5. Handlebars (templating)
 * 6. URL routing (Flatiron/director)
 
-Still needs refactoring and styling
+note to self: still requires refactoring 
