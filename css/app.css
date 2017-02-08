@@ -7,7 +7,7 @@ body{
 
 .todoapp {
     border: 2px solid red;
-    width: 550px;
+    width: 700px;
     margin: 0 auto;
     margin-top: 50px;
 
@@ -57,7 +57,12 @@ body{
     display: inline-block;
 }
 
-.clear-completed {
+.filters li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#clearCompleted {
     float: left;
     width: 33.33333332%;
     box-sizing: border-box;
@@ -68,10 +73,14 @@ body{
     text-align: center;
 }
 
-.edit{
+.selected {
+    border: 1px solid lawngreen
+}
 
+.edit{
 }
 
 .editing{
+    display: none;
 
 }

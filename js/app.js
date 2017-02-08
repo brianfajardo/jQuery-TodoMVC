@@ -2,6 +2,11 @@
 var ENTER_KEY = 13;
 var ESC_KEY = 27;
 
+//Handlebars equality, compares the filter property of the object (app).
+Handlebars.registerHelper('eq', function (a, b, options) {
+	return a === b ? options.fn(this) : options.inverse(this);
+});
+
 //Utility
 var utility = {
 	uuid: function () {
@@ -22,6 +27,9 @@ var utility = {
 		} else {
 			return (JSON.parse(localStorage.getItem(namespace)) || [])
 		}
+	},
+	pluralize: function (todoCount, word) {
+		return todoCount === 1 ? word : word + 's'; // 1 = item; 0/2+ = items
 	}
 };
 
@@ -30,12 +38,20 @@ var app = {
 	init: function () {
 		this.todos = utility.store('LS-todos');
 		this.todoTemplate = Handlebars.compile($('#todoTemplate').html());
+		this.footerTemplate = Handlebars.compile($('#footerTemplate').html());
 		this.bindEvents();
-		this.render();
+
+		new Router({
+			'/:filter': function (filter) {
+				this.filter = filter;
+				this.render();
+			}.bind(this)
+		}).init('/all');
 	},
 	bindEvents: function () {
 		$('.new-todo').on('keyup', this.create.bind(this));
 		$('.toggle-all').on('change', this.toggleAll.bind(this));
+		$('.footer').on('click', '#clearCompleted', this.deleteCompleted.bind(this));
 		$('.todo-list')
 			.on('click', '.deleteBtn', this.delete.bind(this))
 			.on('change', '.toggle', this.toggle.bind(this))
@@ -45,9 +61,21 @@ var app = {
 	},
 	render: function () {
 		$('#new-todo').focus();
+		var todos = this.getFilteredTodos();
 		utility.store('LS-todos', this.todos);
 		$('.todo-list').html(this.todoTemplate(this.todos));
+		$('.main').toggle(todos.length > 0);
+		this.renderFooter();
 
+	},
+	renderFooter: function () {
+		var template = this.footerTemplate({
+			activeTodoCount: this.getActiveTodos().length,
+			activeWord: utility.pluralize(this.getActiveTodos().length, 'item'),
+			completedTodos: this.todos.length - this.getActiveTodos().length,
+			filter: this.filter,
+		});
+		$('.footer').html(template);
 	},
 	create: function (event) {
 		var $input = $(event.target);
@@ -87,7 +115,7 @@ var app = {
 
 		for (var i = 0; i < this.todos.length; i++) {
 			this.todos[i].completed = toggleState;
-		}
+		};
 
 		this.render();
 	},
@@ -112,7 +140,7 @@ var app = {
 			this.render();
 		};
 
-		if ($(event.target).data('abort')){
+		if ($(event.target).data('abort')) {
 			$(event.target).data('abort', false);
 		} else {
 			this.todos[this.elementIndexNumber(event)].title = input
@@ -120,15 +148,29 @@ var app = {
 
 		this.render();
 	},
-	getActiveTodos: function(){
-		return this.todos.filter(function(todo){
-			return !todo.completed;
+	getActiveTodos: function () {
+		return this.todos.filter(function (todo) {
+			return !todo.completed; //not completed is false, therefore !.completed = true
 		})
 	},
-	getCompletedTodos: function(){
-		return this.todos.filter(function(todo){
-			return todo.completed;
+	getCompletedTodos: function () {
+		return this.todos.filter(function (todo) {
+			return todo.completed; //completed is true
 		})
+	},
+	getFilteredTodos: function () {
+		if (this.filter === 'active') {
+			return this.getActiveTodos();
+		};
+		if (this.filter === 'completed') {
+			return this.getCompletedTodos();
+		};
+		return this.todos; //filter: 'all'
+	},
+	deleteCompleted: function () {
+		this.todos = this.getActiveTodos(); //Dynamically remove all completed todos by setting this.todos to only active todos
+		this.filter = 'all';
+		this.render();
 	},
 };
 
